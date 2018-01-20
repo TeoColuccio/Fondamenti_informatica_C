@@ -22,19 +22,20 @@ int main() {
     j = 0;
     currvocale = 'a';
     
-    while ((vett[i][j] != '\0') && ok)  // scansione stringa 
+    while ((vett[i][j] != '\0') && ok) {  // scansione stringa 
       if ((vett[i][j] == 'a') ||
           (vett[i][j] == 'e') ||
           (vett[i][j] == 'i') ||
           (vett[i][j] == 'o') || 
           (vett[i][j] == 'u')) {
         if (vett[i][j] >= currvocale) { // controlla se 
-          currvocale = vett[i][j]; j++; // aggiorna la vocale
+          currvocale = vett[i][j]; // aggiorna la vocale
+          j++; // aggiorno il carattere
         }
         else ok = 0; // altrimenti setta lo stato a 0
       }
       else j++; // passa al carattere successivo
-
+    }
       if(ok) printf("ok %s\n", vett[i]); // se ok e' vero stampa ok e la tringa
       else printf("notok %s\n", vett[i]); // altrimenti stampa notok 
     
