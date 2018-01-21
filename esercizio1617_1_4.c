@@ -16,11 +16,11 @@ void EVAL(char *file, int *nrighe, int *totalch, int *maxriga, float *avgriga) {
   f = fopen(file, "r"); // apro il file in lettura
 
   while (fgets(riga, MAX, f) != NULL) { //
-    chriga = 0; i = 0; *nrighe++; // azzero i caratteri della riga e la variabile contatore, poi aggiungo una riga alla conta
+    chriga = 0; i = 0; (*nrighe)++; // azzero i caratteri della riga e la variabile contatore, poi aggiungo una riga alla conta
 
     while (riga[i] != '\0') { // fin quando non trova il terminatore
       chriga++; // incremento il numero di caratteri
-      if (riga[i] != ' ') *totalch++; // incremento il numero totale di caratteri
+      if (riga[i] != ' ') (*totalch)++; // incremento il numero totale di caratteri
       i++; // passo al carattere successivo
     }
     if (chriga > *maxriga) *maxriga = chriga; // aggiorno o meno il numero della riga con piu' caratteri
