@@ -39,13 +39,15 @@ void cancella (struct sentinel *l, struct el *del) {
   }
 
   else if (del -> prev == NULL) { // primo, ma con elementi successivi ad esso
-    l -> next = del -> next;
-    del -> next -> prev = NULL;
+    l -> next = del -> next; // aggancio l'elemento successivo a quello da eliminare a quello precedente
+    del -> next -> prev = NULL; // il successivo di del e' ora il primo elemento 
   }
-
+  else if (del -> next == NULL) { // ultimo, con elementi che lo precedono
+    del -> prev -> next = NULL; // ora il precedente e' l'ultimo elemento
+  }
   else { // elemento si trova nel mezzo della lista
-    del -> prev -> next = del -> next;
-    del -> next -> prev = del -> prev;
+    del -> prev -> next = del -> next; // l'elemento precedende a prev ora punta a quello successivo
+    del -> next -> prev = del -> prev; // l'elemento successivo a prev ora punta a quello precedente
   }
 
   free(del); // libera la memoria
