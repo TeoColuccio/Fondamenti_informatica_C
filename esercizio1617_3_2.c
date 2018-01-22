@@ -37,7 +37,7 @@ int main() {
   
   do { // inserisci il numero di giocatori
     printf("Numero di giocatori: ");
-    scanf("%d\n", &num_giocatori);
+    scanf("%d", &num_giocatori);
   } while (num_giocatori < MING || num_giocatori > MAXG); // finche' il numero inserito non sia un numero valido
 
   for(g = 0; g < num_giocatori; g++) { // per quanti sono i giocatori
