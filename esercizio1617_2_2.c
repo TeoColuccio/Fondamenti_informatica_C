@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
   for(i = 0; i < numClienti; i++) {
     temp = (tElemPtr)malloc(sizeof(tElemento)); // temp puntatore dinamico ad un tElemento
-    if (temp == NULL) return 0; // ???
+    if (temp == NULL) return 0; // nel caso la malloc() fallisse
     
     temp -> next = NULL; // punta NULL perche' potrebbe essere l'ultimo elemento
 
