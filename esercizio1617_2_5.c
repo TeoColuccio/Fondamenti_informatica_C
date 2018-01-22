@@ -11,7 +11,7 @@ void media(int X[], int last, int n, float MX[]) {
     parziale = 0.0; // azzero ogni volta il parziale
 
     if (i >= (n-1)) { // se i e' maggiore/uguale n-1
-      for (k = i-(n-1); k<=i; k++) parziale+= X[k]; 
+      for (k = i-(n-1); k<=i; k++) parziale+= X[k]; // cosi' impostando il for, prenderemo sempre e solo 3 valori, quelli necessari 
       MX[i] = parziale / n; // esegue la normale media
     }
     else { // se i < n -1
