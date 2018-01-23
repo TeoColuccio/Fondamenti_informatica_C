@@ -16,6 +16,7 @@ listaPtr inserisciCoda(listaPtr lista, int val) {
   if (nuovo == NULL) {printf("Memoria terminata\n"); return lista; } // nel caso la malloc fallisse
   
   nuovo -> val = val; nuovo -> next = NULL; nuovo -> prec = NULL; // inizializzo il nuovo elemento
+  if (lista == NULL) return nuovo; // nel caso la lista fosse nuova
   tmp = lista; // copio l'indirizzo del primo elemento in tmp
 
   while (tmp -> next != NULL) tmp = tmp -> next; // scorre la lista
