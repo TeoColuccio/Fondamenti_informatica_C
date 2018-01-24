@@ -16,13 +16,13 @@ struct tabella {
 struct tabella *lista = NULL;
 
 
-int Query(struct tabella *lista, char nometab, char *parametricampo) {
+int Query(struct tabella *lista, char nometab, char *parametri_campo) {
   struct tabella *tmp = lista; // creo una variabile d'appoggio cosi' da non modificare lista
   struct campo *camp = NULL; // creo un campo di appoggio
 
-  *parametricampo = "create table " ; // inizializzo la stringa che eventualmente verra' stampata con i paramentri del campo
-  *parametri_campo = strcat(*parametricampo, nometab); // aggiungo nometab a parametricampo
-  *parametri_campo = strcat(*parametricampo, "("); // aggiungo nometab a parametricampo
+  strcpy(*parametri_campo, "create table ") ; // inizializzo la stringa che eventualmente verra' stampata con i paramentri del campo
+  strcat(*parametri_campo, nometab); // aggiungo nometab a parametricampo
+  strcat(*parametri_campo, "("); // aggiungo nometab a parametricampo
 
   if (lista == NULL) { printf("La lista e' vuota"); return 0; } // se la lista e' vuota 
 
@@ -32,14 +32,14 @@ int Query(struct tabella *lista, char nometab, char *parametricampo) {
       else { 
         camp = tmp -> nextcampo; // copio il campo della tabella nella variable d'appoggio
         while (camp != NULL) { // fin quando non trova un campo non valido...
-          *parametri_campo = strcat(*parametricampo, camp -> nomecampo); // ...concateno il nome e il tipo del campo nella stringa iniziale
-          *parametri_campo = strcat(*parametricampo, " "); 
-          *parametri_campo = strcat(*parametricampo, camp -> tipocampo); 
-          *parametri_campo = strcat(*parametricampo, ","); 
+          strcat(*parametri_campo, camp -> nomecampo); // ...concateno il nome e il tipo del campo nella stringa iniziale
+          strcat(*parametri_campo, " "); 
+          strcat(*parametri_campo, camp -> tipocampo); 
+          strcat(*parametri_campo, ","); 
         
           camp = camp -> nextcampo; // faccio scorrere i campi
         }
-        *parametri_campo = strcat(*parametricampo, ")"); // aggiungo ')' alla stringa  
+        strcat(*parametri_campo, ")"); // aggiungo ')' alla stringa  
         
         return 1; // ritorno un risultato positivo
       }
