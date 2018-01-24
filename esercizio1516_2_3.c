@@ -16,13 +16,13 @@ struct tabella {
 struct tabella *lista = NULL;
 
 
-int Query(struct tabella *lista, char nometab, char *parametri_campo) {
+int Query(struct tabella *lista, char *nometab, char *parametri_campo) {
   struct tabella *tmp = lista; // creo una variabile d'appoggio cosi' da non modificare lista
   struct campo *camp = NULL; // creo un campo di appoggio
 
-  strcpy(*parametri_campo, "create table ") ; // inizializzo la stringa che eventualmente verra' stampata con i paramentri del campo
-  strcat(*parametri_campo, nometab); // aggiungo nometab a parametricampo
-  strcat(*parametri_campo, "("); // aggiungo nometab a parametricampo
+  strcpy(parametri_campo, "create table ") ; // inizializzo la stringa che eventualmente verra' stampata con i paramentri del campo
+  strcat(parametri_campo, nometab); // aggiungo nometab a parametricampo
+  strcat(parametri_campo, "("); // aggiungo nometab a parametricampo
 
   if (lista == NULL) { printf("La lista e' vuota"); return 0; } // se la lista e' vuota 
 
@@ -32,14 +32,14 @@ int Query(struct tabella *lista, char nometab, char *parametri_campo) {
       else { 
         camp = tmp -> nextcampo; // copio il campo della tabella nella variable d'appoggio
         while (camp != NULL) { // fin quando non trova un campo non valido...
-          strcat(*parametri_campo, camp -> nomecampo); // ...concateno il nome e il tipo del campo nella stringa iniziale
-          strcat(*parametri_campo, " "); 
-          strcat(*parametri_campo, camp -> tipocampo); 
-          strcat(*parametri_campo, ","); 
+          strcat(parametri_campo, camp -> nomecampo); // ...concateno il nome e il tipo del campo nella stringa iniziale
+          strcat(parametri_campo, " "); 
+          strcat(parametri_campo, camp -> tipocampo); 
+          strcat(parametri_campo, ","); 
         
           camp = camp -> nextcampo; // faccio scorrere i campi
         }
-        strcat(*parametri_campo, ")"); // aggiungo ')' alla stringa  
+        strcat(parametri_campo, ")"); // aggiungo ')' alla stringa  
         
         return 1; // ritorno un risultato positivo
       }
@@ -50,6 +50,11 @@ int Query(struct tabella *lista, char nometab, char *parametri_campo) {
   return 0;
 }
 
+
+
+int main() {
+  char nometab[50], parametricampo[1000]; 
+
 // creo una tabella ed un campo di prova
 struct campo campo1;
 strcpy(campo1.nomecampo, "primo_campo");
@@ -57,17 +62,14 @@ strcpy(campo1.tipocampo, "char");
 
 struct tabella tab1;
 strcpy(tab1.nometabella, "prima");
-nexttabella = NULL;
+tab1.nexttabella = NULL;
 
-tab1 -> nextcampo = campo1;
-
-int main() {
-  char nometab[50], parametricampo[1000]; 
+tab1.nextcampo = &campo1;
 
   printf("Inserisci il nome di una tabella da ricercare: \n"); 
   scanf("%s", nometab);
 
-  if (query(lista, nometab, &parametricampo) == 0) printf("Tabella non trovata..\n");
+  if (Query(lista, nometab, parametricampo) == 0) printf("Tabella non trovata..\n");
   else {
     printf("Tabella trovata...");
     printf("%s\n", parametricampo);
