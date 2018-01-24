@@ -13,8 +13,7 @@ struct tabella {
   struct campo *nextcampo;
 };
 
-struct tabella *lista = NULL;
-
+int Query(struct tabella *lista, char *nometab, char *parametri_campo);
 
 int Query(struct tabella *lista, char *nometab, char *parametri_campo) {
   struct tabella *tmp = lista; // creo una variabile d'appoggio cosi' da non modificare lista
@@ -50,23 +49,26 @@ int Query(struct tabella *lista, char *nometab, char *parametri_campo) {
   return 0;
 }
 
+int main()
+{
+  struct tabella *lista = NULL;
 
-
-int main() {
   char nometab[50], parametricampo[1000]; 
 
-// creo una tabella ed un campo di prova
-struct campo campo1;
-strcpy(campo1.nomecampo, "primo_campo");
-strcpy(campo1.tipocampo, "char");
+  // creo una tabella ed un campo di prova
+  struct campo campo1;
+  strcpy(campo1.nomecampo, "primo_campo");
+  strcpy(campo1.tipocampo, "char");
+  campo1.nextcampo = NULL;
 
-struct tabella tab1;
-strcpy(tab1.nometabella, "prima");
-tab1.nexttabella = NULL;
+  struct tabella tab1;
+  strcpy(tab1.nometabella, "prima");
+  tab1.nexttabella = NULL;
+  tab1.nextcampo = &campo1;
 
-tab1.nextcampo = &campo1;
+  lista = &tab1;
 
-  printf("Inserisci il nome di una tabella da ricercare: \n"); 
+  printf("Inserisci il nome di una tabella da ricercare: \n");
   scanf("%s", nometab);
 
   if (Query(lista, nometab, parametricampo) == 0) printf("Tabella non trovata..\n");
