@@ -62,7 +62,7 @@ nexttabella = NULL;
 tab1 -> nextcampo = campo1;
 
 int main() {
-  char *nometab, *parametricampo; 
+  char nometab[50], parametricampo[1000]; 
 
   printf("Inserisci il nome di una tabella da ricercare: \n"); 
   scanf("%s", nometab);
