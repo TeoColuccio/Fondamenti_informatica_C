@@ -52,14 +52,14 @@ int Query(struct tabella *lista, char nometab, char *parametri_campo) {
 
 // creo una tabella ed un campo di prova
 struct campo campo1;
-strcpy(campo1.nomecampo), "primo_campo";
-strcpy(campo1.tipocampo),"char";
+strcpy(campo1.nomecampo, "primo_campo");
+strcpy(campo1.tipocampo, "char");
 
 struct tabella tab1;
 strcpy(tab1.nometabella, "prima");
 nexttabella = NULL;
 
-tab1 -> nextcampo = *campo1;
+tab1 -> nextcampo = campo1;
 
 int main() {
   char *nometab, *parametricampo; 
@@ -74,9 +74,4 @@ int main() {
   }
 
   return 0;
-}
-
-
-
-
-        
+}        
