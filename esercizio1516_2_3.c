@@ -34,7 +34,7 @@ int Query(struct tabella *lista, char *nometab, char *parametri_campo) {
           strcat(parametri_campo, camp -> nomecampo); // ...concateno il nome e il tipo del campo nella stringa iniziale
           strcat(parametri_campo, " "); 
           strcat(parametri_campo, camp -> tipocampo); 
-          strcat(parametri_campo, ","); 
+          if (camp -> nextcampo != NULL) strcat(parametri_campo, ","); 
         
           camp = camp -> nextcampo; // faccio scorrere i campi
         }
