@@ -54,6 +54,13 @@ int leggi(struct el *lista, int *numericaricati) {
     return res;
 }
 
+void cambia(struct el *lista) {
+  struct el *tmp = lista;
+  
+  while (tmp -> next != NULL) tmp = tmp -> next;
+
+  lista -> prec = tmp;
+}
 
 int main () {
     struct el *primo = NULL;
