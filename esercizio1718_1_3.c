@@ -37,12 +37,15 @@ void crea_lista(struct list_t *l, int valore) {
 }
 
 int main() {
-  struct list_t *a, *b, *c;
+  struct list_t *l;
+  struct list_t a, b, c;
   
+/*  l->a;
   a->valore = 1;
   a->next = b;
   b->valore = 2;
   b->next = NULL;
+*/
 
 /*  while(a != NULL) {
     printf("%d: \n", a->valore);
