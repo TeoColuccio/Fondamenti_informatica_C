@@ -8,7 +8,16 @@ struct el {
     struct el *prec;
 };
 
-int leggi(struct el *lista, int *numericaricati) {
+void stampa(struct el *lista) {
+  if (lista == NULL) printf("ERROR\n");
+  while (lista != NULL) {
+    printf("El -> val = %f\n", lista->val);
+    lista = lista->next;
+  }
+}
+
+int leggi(struct el **l, int *numericaricati) {
+    struct el *lista = *l;
     struct el *nuovo; // creo un elemento d'appoggio 
     char *str, nome_file[100]; // creo 2 stringhe, una ci andranno le singole righe del file, e l'altra il nome del file inserito da terminale
     int res = 0; // res e' il valore da ritornare: 0 in caso tutto vada a buon fine, e -2 nel caso qualcosa vada storto
@@ -43,6 +52,9 @@ int leggi(struct el *lista, int *numericaricati) {
         if (lista != NULL) { // condizione necessaria se la lista iniziale e' vuota
             lista->next = nuovo; // il primo elemento ora e' il primo "nuovo"
         }
+        else {
+          *l = nuovo;
+        }
 
         lista = nuovo; // aggiorno l'indirizzo della lista
 
@@ -54,25 +66,30 @@ int leggi(struct el *lista, int *numericaricati) {
     return res; // ritorno un valore 
 }
 
-void cambia (struct el *lista) {
-  struct el *tmp = lista; // creo una lista temporanea
+void cambia (struct el **lista) {
+  struct el *tmp = *lista; // creo una lista temporanea
   
   while (tmp -> next != NULL) tmp = tmp -> next; // sposto tmp all'ultimo elemento della lista
-  tmp -> prec->next=NULL; // il penultimo elemento ora punta a null 
+  tmp -> prec-> next=NULL; // il penultimo elemento ora punta a null 
   tmp -> prec = NULL; // ora tmp e' il primo elemento dalla lista, quindi l'elemento precedente e' null
-  lista -> prec = tmp; // // sposto tmp in prima posizione
-  tmp -> next = lista; // il 'vecchio' primo elemento, ora viene dopo tmp;
+  (*lista) -> prec = tmp; // // sposto tmp in prima posizione
+  tmp -> next = *lista; // il 'vecchio' primo elemento, ora viene dopo tmp;
+  *lista = tmp;
 }
 
 int main () {
     struct el *primo = NULL;
     int letti;
 
-    leggi(primo, &letti);
+    leggi(&primo, &letti);
     
     printf("%d caratteri processati\n", letti);
-    
-    cambia(primo);
+    stampa(primo);    
+
+    cambia(&primo);
+    printf("\n\n\n");
+
+    stampa(primo);    
 
   return 0;
 }
