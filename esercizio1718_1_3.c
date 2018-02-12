@@ -21,36 +21,56 @@ int conta(struct list_t* lista, int valore) {
   }
   return contatore;
 }
-
-void crea_lista(struct list_t *l, int valore) {
+void crea_lista_vuota(struct list_t **l, int valore) {
   struct list_t *elem = (struct list_t*) malloc(sizeof(struct list_t));
   elem->valore = valore;
   elem->next = NULL;
+  *l = elem;
+}
 
-  if (l == NULL) {
-    l = elem;
-  }
+
+void crea_lista(struct list_t **l, int valore) {
+  struct list_t *tmp = *l;
+  if (*l == NULL) crea_lista_vuota(l, valore);
+
   else {
-    while (l != NULL) l=l->next;
-    l->next = elem;
+    struct list_t *elem = (struct list_t*) malloc(sizeof(struct list_t));
+    if (elem == NULL) return; 
+
+    elem->valore = valore;
+    elem->next = NULL;
+    
+    while (tmp->next != NULL) {
+      tmp=tmp->next;
+    }
+    tmp->next = elem;
   }
 }
 
 int main() {
-  struct list_t *l;
-  struct list_t a, b, c;
-  
-/*  l->a;
-  a->valore = 1;
-  a->next = b;
-  b->valore = 2;
-  b->next = NULL;
-*/
 
-/*  while(a != NULL) {
-    printf("%d: \n", a->valore);
-    a = a->next;
+/* Inserimento manuale:
+  int i;
+  struct list_t *tmp = lista;
+ * for (i = 0; i < 10; i++) {
+    struct list_t *a = malloc(sizeof(struct list_t));
+    a->valore = i;
+    a->next = NULL;
+    if (tmp == NULL) lista = a;
+    else tmp->next = a;
+  tmp = a;
   }
 */
+
+  crea_lista(&lista, 1);
+  crea_lista(&lista, 2);
+  crea_lista(&lista, 3);
+  crea_lista(&lista, 4);
+
+  while (lista != NULL) { 
+    printf("%d \n", lista->valore);
+    lista = lista->next;
+  }
+
   return 0;
 }
