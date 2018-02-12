@@ -54,13 +54,24 @@ int conta(struct list_t *l, int valore) {
   return contatore; // ritorno il contatore
 }
 
+struct list_t * delel(struct list_t *l, struct list_t * C, struct list_t *P) {
+  if (P != NULL) { // se NON ci troviamo sul primo elemento..
+    P->next = C->next; // ora P punta all'elemento successivo di quello da eliminare
+    free(C); // libero C
+  } 
+  else { // se C e' il primo elemento
+    l = C->next; // la testa punta ora al secondo elemento 
+    free(C); // libero C
+  }
+  return l;
+}
+
 int cancella(struct list_t **l, int valore, int limit) {
   int contatore = 0; // creo un contatore
   struct list_t *tmp = *l; // creo un tmp per non modificare l
   struct list_t *canc = NULL; // creo canc che sara' l'elemento precedente a quello da eliminare
   struct list_t *prec = NULL; // creo prec che cicla con tmp puntanto al suo precedente
 
-  
   if (l == NULL) return 0; // se la lista e' nulla, ritorna 0
   
   while (tmp != NULL) { // finche' la non arrivo all'ultimo elemento
@@ -72,22 +83,30 @@ int cancella(struct list_t **l, int valore, int limit) {
 
     tmp = tmp->next; // scorro tmp
   }
-  
-  if (contatore < limit) { // se devo cancellare...
-    if (canc==NULL) { // se ci troviamo sul primo elemento della lista...
-      tmp = *l; // tmp diventa il primo elemento
-      *l = tmp->next; // la testa punta ora al secondo
-      free(tmp); // libero tmp
-    } 
-    else { // se e' un elemento diverso dal primo..
-      tmp = canc->next; // tmp diventa l'elemento da cancellare
-      canc -> next = tmp ->next; // canc punta ora al successivo di quello da eliminare
-      free(tmp); // libera tmp
-    }
-    return 1; // ritorno 1 se cancello...
+
+  if (contatore < limit) { 
+    /* COMMENTATA LA PARTE PRIMA DELLA CREAZIONE DI DELEL */
+    // se devo cancellare...
+    /*    if (canc==NULL) { // se ci troviamo sul primo elemento della lista...
+          tmp = *l; // tmp diventa il primo elemento
+     *l = tmp->next; // la testa punta ora al secondo
+     free(tmp); // libero tmp
+     } 
+     else { // se e' un elemento diverso dal primo..
+     tmp = canc->next; // tmp diventa l'elemento da cancellare
+     canc -> next = tmp ->next; // canc punta ora al successivo di quello da eliminare
+     free(tmp); // libera tmp
+     } 
+     return 1; // ritorno 1 se cancello...
+     }
+     return 0; // ...altrimenti ritorna 0
+     */
+    *l = delel(*l, canc->next, canc); 
+    return 1;
   }
-  return 0; // ...altrimenti ritorna 0
+  return 0;
 }
+
 
 int main() {
 
