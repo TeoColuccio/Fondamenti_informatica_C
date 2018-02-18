@@ -26,6 +26,7 @@ void cerca(listaPtr lista, int val, listaPtr *elem, int *posizione) {
 
 listaPtr cancella(listaPtr lista, listaPtr elemento1, listaPtr elemento2, int *pos1, int *pos2) {
   listaPtr tmp = lista;
+  listaPtr canc;
   int i = 0;
 
   if (elemento1 == NULL || elemento2 == NULL || *pos1 > *pos2) { printf("Elementi non validi.\n"); return lista; }
@@ -34,8 +35,9 @@ listaPtr cancella(listaPtr lista, listaPtr elemento1, listaPtr elemento2, int *p
   tmp->next=elemento2->next;
   elemento2->prec = tmp;
   while(tmp -> next != elemento2->next) {
-    tmp->next = tmp->next->next;
+    canc = tmp->next;
     free(tmp->next); 
+    tmp = canc;
   }
   return lista;
 }
