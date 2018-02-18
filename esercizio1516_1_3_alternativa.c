@@ -29,7 +29,7 @@ listaPtr cancella(listaPtr lista, listaPtr elemento1, listaPtr elemento2, int *p
   listaPtr canc;
   int i = 0;
 
-  if (elemento1 == NULL || elemento2 == NULL || *pos1 > *pos2) { printf("Elementi non validi.\n"); return lista; }
+  if (lista == NULL || elemento1 == NULL || elemento2 == NULL || *pos1 > *pos2) { printf("Elementi non validi.\n"); return lista; }
 
   while (i < *pos1) { tmp=tmp->next; i++; }
   tmp->next=elemento2->next;
@@ -86,7 +86,7 @@ int main() {
 
    primo=cancella(primo, elemento1, elemento2, &val1, &val2);
 //   while(primo->prec != NULL) primo = primo->prec;
-  
+
    while (primo != NULL) {
      printf("valore: %d\n", primo->val);
      primo = primo->next;
